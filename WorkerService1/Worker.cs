@@ -1,7 +1,6 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,10 +8,9 @@ namespace WorkerService1
 {
     public class Worker : BackgroundService
     {
+        
         private readonly ILogger<Worker> _logger;
-        private HttpClient client;
        
-      
         private readonly Random _random = new Random();
 
         public Worker(ILogger<Worker> logger)
@@ -22,13 +20,13 @@ namespace WorkerService1
 
         public override Task StopAsync(CancellationToken cancellationToken)
         {
-             client.Dispose();
+            
             _logger.LogInformation("Service stopped");
             return base.StopAsync(cancellationToken);
         }
         public override Task StartAsync(CancellationToken cancellationToken)
         {
-            client = new HttpClient();
+           
            
             return base.StartAsync(cancellationToken);
         }
